@@ -26,7 +26,8 @@
 
 const
     cRequest = require('request'),
-    userAgent = require('./UserAgent');
+    userAgent = require('./UserAgent'),
+    Socks5ClientHttpsAgent = require('socks5-https-client/lib/Agent');
 
 function createOption(options) {
     let defaultOptions = {
@@ -106,10 +107,32 @@ function Client(url, options, callback)
     return cRequest(options, callback);
 }
 
+function ClientSock5(url, options, proxyHost, proxyPort, callback) {
+    let isop = true;
+    if (Object.prototype.toString.call(options) !== '[object Object]') {
+        options = {};
+        isop = false;
+    }
+    if (typeof url === 'string') {
+        options.url = url;
+    } else if (typeof url === 'object' && ! isop ) {
+        options = url;
+    }
+
+    options = createOption(options);
+    options.agent = new Socks5ClientHttpsAgent({
+        socksHost: proxyHost,
+        socksPort: proxyPort
+    });
+    callback = callback || function () {};
+    return cRequest(options, callback);
+}
+
 function Request() {
     this.Request = this;
     this.createOption = createOption;
     this.Client = Client;
+    this.ClientSock5 = ClientSock5;
     return this;
 }
 
