@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const Request     = require('./app/Request');
-const jQuery      = require('./app/jQuery');
-const ProxySearch = require('./app/ProxySearch');
-const UserAgent   = require('./app/UserAgent');
+const Request     = require('./Request');
+const jQuery      = require('./jQuery');
+const ProxySearch = require('./ProxySearch');
+const UserAgent   = require('./UserAgent');
 
 function Proxies() {
     this.Proxies = this;
