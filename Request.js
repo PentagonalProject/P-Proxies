@@ -31,10 +31,10 @@ const
 function createOption(options) {
     let defaultOptions = {
         method: 'GET',
-        'headers' : {
+        'headers': {
             'User-Agent': userAgent.generate(),
-            'Accept-Encoding' : 'br',
-            'Accept-Language' : 'en-US,en;q=0.9',
+            'Accept-Encoding': 'br',
+            'Accept-Language': 'en-US,en;q=0.9',
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache',
             'Upgrade-Insecure-Requests': '1'
@@ -66,12 +66,17 @@ function createOption(options) {
 
         return opt;
     }
-    for (let key in defaultOptions.headers) {
-        if (! defaultOptions.headers.hasOwnProperty(key) || options.headers.hasOwnProperty(key)) {
-            continue;
-        }
+    if (options.headers
+        && typeof options.headers === 'object'
+        && Object.prototype.toString.call(options.headers) === '[object Object]'
+    ) {
+        for (let key in defaultOptions.headers) {
+            if (!defaultOptions.headers.hasOwnProperty(key) || options.headers.hasOwnProperty(key)) {
+                continue;
+            }
 
-        options.headers[key] = defaultOptions.headers[key];
+            options.headers[key] = defaultOptions.headers[key];
+        }
     }
 
     return options;
