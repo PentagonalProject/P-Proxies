@@ -250,7 +250,7 @@ const proxyCrawl = (countries = 'US', cacheTime = 300, debug = false) => new Pro
                     time = time.match(/s/) === null ? parseInt(time) : parseInt(parseFloat(time) * 1000);
                     countryList[type].push({
                         ip: ip,
-                        port: port,
+                        port: parseInt(port),
                         type: sockType || null,
                         sock5: isSock5,
                         sock4: isSock4,

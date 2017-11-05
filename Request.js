@@ -45,9 +45,26 @@ function createOption(options) {
         return defaultOptions;
     }
 
-    if (Object.prototype.toString.call(options.headers) !== '[object Object]') {
+    if (options.headers
+        && typeof options.headers === 'object'
+        && Object.prototype.toString.call(options.headers) !== '[object Object]'
+    ) {
         options.headers = defaultOptions.headers;
         return options;
+    }
+    if (typeof options.headers === 'boolean'
+        || options.headers === null
+    ) {
+        let opt = {};
+        for (let k in options) {
+            if (options.hasOwnProperty(k)) {
+                if (k !== 'headers') {
+                    opt = options[k];
+                }
+            }
+        }
+
+        return opt;
     }
     for (let key in defaultOptions.headers) {
         if (! defaultOptions.headers.hasOwnProperty(key) || options.headers.hasOwnProperty(key)) {
