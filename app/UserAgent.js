@@ -52,8 +52,9 @@ function UserAgent() {
 }
 
 UserAgent.prototype.constructor = UserAgent;
-UserAgent.constructor = new UserAgent;
-UserAgent = UserAgent.constructor;
+UserAgent.constructor = UserAgent;
+
+UserAgent = new UserAgent;
 UserAgent.UserAgent = UserAgent;
 
 module.exports = UserAgent;

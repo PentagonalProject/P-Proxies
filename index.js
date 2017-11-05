@@ -36,9 +36,10 @@ function Proxies() {
     return this;
 }
 
-Proxies.constructor = new Proxies;
+Proxies.constructor = Proxies;
 Proxies.prototype.constructor = Proxies;
-Proxies = Proxies.constructor;
+
+Proxies = new Proxies;
 Proxies.Proxies = Proxies;
 
 /**

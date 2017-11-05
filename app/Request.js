@@ -85,8 +85,9 @@ function Request() {
 }
 
 Request.prototype.constructor = Request;
-Request.constructor = new Request;
-Request = Request.constructor;
+Request.constructor = Request;
+
+Request = new Request;
 Request.Request = Request;
 
 module.exports = Request;

@@ -371,8 +371,9 @@ function ProxySearch() {
     return this;
 }
 ProxySearch.prototype.constructor = ProxySearch;
-ProxySearch.constructor = new ProxySearch;
-ProxySearch = ProxySearch.constructor;
+ProxySearch.constructor = ProxySearch;
+
+ProxySearch = new ProxySearch;
 ProxySearch.ProxySearch = ProxySearch;
 
 
