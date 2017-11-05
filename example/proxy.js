@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const {proxyCrawl, countryList} = require('../index').ProxySearch;
+const {proxyCrawl, countryList} = require('p-proxies').ProxySearch;
 
 let proxyToSearch = ['US', 'Brazil', 'UK', 'Russia'];
 let debug = true;
