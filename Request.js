@@ -67,14 +67,17 @@ function createOption(options) {
  */
 function Client(url, options, callback)
 {
+    let isop = true;
     if (Object.prototype.toString.call(options) !== '[object Object]') {
         options = {};
+        isop = false;
     }
     if (typeof url === 'string') {
         options.url = url;
-    } else if (typeof url === 'object' && typeof options !== 'object') {
+    } else if (typeof url === 'object' && ! isop ) {
         options = url;
     }
+
     options = createOption(options);
     callback = callback || function () {};
     return cRequest(options, callback);
