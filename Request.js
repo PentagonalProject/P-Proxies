@@ -30,6 +30,7 @@ const
 
 function createOption(options) {
     let defaultOptions = {
+        method: 'GET',
         'headers' : {
             'User-Agent': userAgent.generate(),
             'Accept-Encoding' : 'br',
