@@ -70,8 +70,11 @@ function Client(url, options, callback)
     if (Object.prototype.toString.call(options) !== '[object Object]') {
         options = {};
     }
-
-    options.url = url;
+    if (typeof url === 'string') {
+        options.url = url;
+    } else if (typeof url === 'object' && typeof options !== 'object') {
+        options = url;
+    }
     options = createOption(options);
     callback = callback || function () {};
     return cRequest(options, callback);
