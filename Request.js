@@ -108,22 +108,29 @@ function Client(url, options, callback)
 }
 
 function ClientSock5(url, options, proxyHost, proxyPort, callback) {
-    let isop = true;
+    let isOpt = true;
     if (Object.prototype.toString.call(options) !== '[object Object]') {
         options = {};
-        isop = false;
+        isOpt = false;
     }
     if (typeof url === 'string') {
         options.url = url;
-    } else if (typeof url === 'object' && ! isop ) {
+    } else if (typeof url === 'object' && ! isOpt ) {
         options = url;
     }
-
-    options = createOption(options);
-    options.agent = new Socks5ClientHttpsAgent({
+    let socketOpt = {
         socksHost: proxyHost,
         socksPort: proxyPort
-    });
+    };
+
+    if (typeof options['socketTimeOut'] === "number") {
+        socketOpt.timeout = options['socketTimeOut'];
+        delete options['socketTimeOut'];
+    } else if (typeof options['timeout'] === "number") {
+        socketOpt.timeout = options['timeout'];
+    }
+    options.agent = new Socks5ClientHttpsAgent(socketOpt);
+    options = createOption(options);
     callback = callback || function () {};
     return cRequest(options, callback);
 }
